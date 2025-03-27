@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Job Recommendations</title>
+</head>
+<body>
+    <h2>Recommended Jobs</h2>
+    <ul>
+        {% for job in jobs %}
+            <li><strong>{{ job.job_title }}</strong> - Similarity: {{ job.similarity }}%</li>
+        {% endfor %}
+    </ul>
+    <a href="/">Go Back</a>
+</body>
+</html>
