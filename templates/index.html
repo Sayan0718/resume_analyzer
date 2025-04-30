@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Powered Resume Analyzer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <!-- Google Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<header>
+    <h1>AI-Powered Resume Analyzer</h1>
+    <p>Your one-stop solution for Resume Optimization & Job Recommendations</p>
+</header>
+
+<main class="container">
+    <section class="features">
+        <div class="feature-card">
+            <img src="{{ url_for('static', filename='images/job.png') }}" alt="Job Recommendation">
+            <h3>Job Recommendation</h3>
+            <p>Find jobs that match your resume perfectly.</p>
+            <a href="/job_recommendation" class="btn">Get Recommendations</a>
+        </div>
+
+        <div class="feature-card">
+            <img src="{{ url_for('static', filename='images/ats.png') }}" alt="ATS Score Checker">
+            <h3>ATS Score Checker</h3>
+            <p>Check your resume’s ATS compatibility.</p>
+            <a href="/ats_score_checker" class="btn">Check ATS Score</a>
+        </div>
+
+        <div class="feature-card">
+            <img src="{{ url_for('static', filename='images/build.png') }}" alt="Build Resume">
+            <h3>Build Resume</h3>
+            <p>Create a professional resume effortlessly.</p>
+            <a href="/build_resume" class="btn">Build Resume</a>
+        </div>
+
+        <div class="feature-card">
+            <img src="{{ url_for('static', filename='images/improve.png') }}" alt="Resume Checker">
+            <h3>Resume Checker</h3>
+            <p>Improve your resume by eliminating errors and missing skills.</p>
+            <a href="/resume_checker" class="btn">Check Resume</a>
+        </div>
+
+        <div class="feature-card">
+            <img src="{{ url_for('static', filename='images/interview.png') }}" alt="Mock Interview">
+            <h3>Mock Interview</h3>
+            <p>Practice interview questions based on role and technology.</p>
+            <a href="/mock_interview" class="btn">Start Interview</a>
+        </div>
+
+
+    </section>
+</main>
+
+<footer>
+    <p>&copy; 2024 AI Resume Analyzer. All Rights Reserved.</p>
+</footer>
+
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
+<!-- Home Page HTML -->

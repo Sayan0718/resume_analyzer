@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Resume Checker - AI Resume Analyzer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+
+<header>
+    <h1>Resume Checker</h1>
+    <p>Upload your resume to check for errors and improvements.</p>
+</header>
+
+<main class="container">
+    <form action="/resume_checker" method="post" enctype="multipart/form-data">
+        <input type="file" name="resume" accept=".pdf" required>
+        <button type="submit">Check & Improve</button>
+    </form>
+</main>
+
+<footer>
+    <a href="/">Back to Home</a>
+</footer>
+
+</body>
+</html>
+<!-- Resume Checker HTML -->

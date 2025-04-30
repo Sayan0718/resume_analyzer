@@ -1,1 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ATS Score Checker - AI Resume Analyzer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
 
+<header>
+    <h1>ATS Score Checker</h1>
+    <p>Check your resume’s compatibility with Applicant Tracking Systems (ATS).</p>
+</header>
+
+<main class="container">
+    <form action="/ats_score_checker" method="post" enctype="multipart/form-data">
+        <input type="file" name="resume" accept=".pdf" required>
+        <textarea name="job_description" placeholder="Paste the job description here" required></textarea>
+        <button type="submit">Check ATS Score</button>
+    </form>
+</main>
+
+<footer>
+    <a href="/">Back to Home</a>
+</footer>
+
+</body>
+</html>
+<!-- ATS Score Checker HTML -->

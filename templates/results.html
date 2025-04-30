@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Results - AI Resume Analyzer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+
+<header>
+    <h1>Your Results</h1>
+</header>
+
+<main class="container">
+    {% if jobs %}
+        <h2>Top Job Matches</h2>
+        <ul>
+            {% for job in jobs %}
+                <li>
+                    <strong>{{ job.job_title }}</strong> - Similarity: {{ job.similarity }}%
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    {% if ats_score %}
+        <h2>Your ATS Score</h2>
+        <p>Your ATS compatibility score is <strong>{{ ats_score }}%</strong>.</p>
+    {% endif %}
+
+    {% if missing_skills %}
+        <h2>Suggestions to Improve Your Resume</h2>
+        <p>Missing Skills:</p>
+        <ul>
+            {% for skill in missing_skills %}
+                <li>{{ skill }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</main>
+
+<footer>
+    <a href="/">Back to Home</a>
+</footer>
+
+</body>
+</html>
+<!-- Results HTML -->

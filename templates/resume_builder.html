@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Build Resume - AI Resume Analyzer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+
+<header>
+    <h1>Build Your Resume</h1>
+    <p>Fill the form to generate your professional resume.</p>
+</header>
+
+<main class="container">
+    <form action="/generate_resume" method="post">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Your Email" required>
+        <input type="text" name="phone" placeholder="Phone Number" required>
+        <input type="text" name="linkedin" placeholder="LinkedIn URL">
+        <input type="text" name="github" placeholder="GitHub URL">
+        <textarea name="objective" placeholder="Career Objective" required></textarea>
+        <textarea name="skills" placeholder="Skills (comma separated)" required></textarea>
+        <textarea name="education" placeholder="Education Details" required></textarea>
+        <textarea name="projects" placeholder="Projects" required></textarea>
+        <textarea name="certifications" placeholder="Certifications" required></textarea>
+        <button type="submit">Generate Resume</button>
+    </form>
+</main>
+
+<footer>
+    <a href="/">Back to Home</a>
+</footer>
+
+</body>
+</html>

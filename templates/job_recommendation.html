@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Job Recommendation - AI Resume Analyzer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+
+<header>
+    <h1>Job Recommendation</h1>
+    <p>Upload your resume to get personalized job recommendations.</p>
+</header>
+
+<main class="container">
+    <form action="/job_recommendation" method="post" enctype="multipart/form-data">
+        <input type="file" name="resume" accept=".pdf" required>
+        <button type="submit">Upload & Analyze</button>
+    </form>
+</main>
+
+<footer>
+    <a href="/">Back to Home</a>
+</footer>
+
+</body>
+</html>
+<!-- Job Recommendation Page HTML -->
