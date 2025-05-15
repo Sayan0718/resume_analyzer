@@ -12,13 +12,30 @@
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 <body>
-
+<nav class="navbar">
+    <div class="logo">
+        <h2>RESUME ANALYZER</h2>
+    </div>
+    <div class="nav-items">
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#main">Services</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </div>
+</nav>
 <header>
-    <h1>AI-Powered Resume Analyzer</h1>
-    <p>Your one-stop solution for Resume Optimization & Job Recommendations</p>
-</header>
+    <div class="header">
+        <h1>AI-Powered Resume Analyzer</h1>
+        <p>Your one-stop solution for Resume Optimization & Job Recommendations</p> 
+        <img src="{{ url_for('static', filename='images/head.gif') }}" alt="Animated Banner" class="banner-gif" />
+    </div>
+    <div class="sub-head"> 
+        <h2>What We Provide</h2>
+    </div>
 
-<main class="container">
+</header>
+<main class="container" id="main">
     <section class="features">
         <div class="feature-card">
             <img src="{{ url_for('static', filename='images/job.png') }}" alt="Job Recommendation">
@@ -54,10 +71,21 @@
             <p>Practice interview questions based on role and technology.</p>
             <a href="/mock_interview" class="btn">Start Interview</a>
         </div>
-
-
     </section>
+    <div class="line-container">
+        <div class="line"></div>
+      </div>      
+    <div class="slider">
+        <div class="slides">
+            <img src="{{ url_for('static', filename='images/1.png') }}" alt="Banner 1" class="slide" />
+            <img src="{{ url_for('static', filename='images/2.png') }}" alt="Banner 2" class="slide" />
+            <img src="{{ url_for('static', filename='images/3.png') }}" alt="Banner 3" class="slide" />
+        </div>
+    </div>
+    
 </main>
+
+  
 
 <footer>
     <p>&copy; 2024 AI Resume Analyzer. All Rights Reserved.</p>
