@@ -8,6 +8,10 @@ from docx import Document
 import google.generativeai as genai
 from config import gemini_api_key
 import markdown
+from werkzeug.utils import secure_filename
+from docx import Document
+from docx.shared import Pt
+
 
 app = Flask(__name__)
 import os
@@ -41,7 +45,8 @@ def job_recommendation():
 def ats_score_checker():
     if request.method == "POST":
         file = request.files["resume"]
-        job_description = request.form["job_description"]
+        job_description = request.form.get("job_description", "")
+
 
         filename = secure_filename(file.filename)
         filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
@@ -88,30 +93,62 @@ def generate_resume():
     linkedin = data['linkedin']
     github = data['github']
     objective = data['objective']
-    skills = data['skills']
+    skills = data['skills'].split(",")
     education = data['education']
-    projects = data['projects']
-    certifications = data['certifications']
+    projects = data['projects'].split("\n")
+    certifications = data['certifications'].split("\n")
+
+    # optional
+    achievements = data.get('achievements', '').split("\n") if 'achievements' in data else []
+    conferences = data.get('conferences', '').split("\n") if 'conferences' in data else []
 
     doc = Document()
     doc.add_heading(name, 0)
-    doc.add_paragraph(f"Email: {email} | Phone: {phone}")
-    doc.add_paragraph(f"LinkedIn: {linkedin} | GitHub: {github}")
 
-    doc.add_heading('Objective', level=1)
+    p = doc.add_paragraph()
+    p.add_run(f"Email: {email} | Phone: {phone}\n").bold = True
+    p.add_run(f"LinkedIn: {linkedin} | GitHub: {github}")
+
+    doc.add_heading('OBJECTIVE', level=1)
     doc.add_paragraph(objective)
 
-    doc.add_heading('Skills', level=1)
-    doc.add_paragraph(skills)
+    doc.add_heading('TECHNICAL SKILLS', level=1)
+    for skill in skills:
+        if skill.strip():
+            doc.add_paragraph(skill.strip(), style='ListBullet')
 
-    doc.add_heading('Education', level=1)
+    doc.add_heading('EDUCATION', level=1)
     doc.add_paragraph(education)
 
-    doc.add_heading('Projects', level=1)
-    doc.add_paragraph(projects)
+    if projects and any(projects):
+        doc.add_heading('PROJECTS', level=1)
+        for proj in projects:
+            if proj.strip():
+                doc.add_paragraph(proj.strip(), style='ListBullet')
 
-    doc.add_heading('Certifications', level=1)
-    doc.add_paragraph(certifications)
+    if certifications and any(certifications):
+        doc.add_heading('CERTIFICATIONS', level=1)
+        for cert in certifications:
+            if cert.strip():
+                doc.add_paragraph(cert.strip(), style='ListBullet')
+
+    if achievements and any(achievements):
+        doc.add_heading('ACHIEVEMENTS', level=1)
+        for ach in achievements:
+            if ach.strip():
+                doc.add_paragraph(ach.strip(), style='ListBullet')
+
+    if conferences and any(conferences):
+        doc.add_heading('CONFERENCES', level=1)
+        for conf in conferences:
+            if conf.strip():
+                doc.add_paragraph(conf.strip(), style='ListBullet')
+
+    # formatting
+    style = doc.styles['Normal']
+    font = style.font
+    font.name = 'Calibri'
+    font.size = Pt(11)
 
     output_path = f"uploads/{secure_filename(name)}_Resume.docx"
     doc.save(output_path)
