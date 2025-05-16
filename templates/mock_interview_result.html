@@ -6,6 +6,9 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
+<div id="loader-wrapper">
+  <div id="loader"></div>
+</div>
     <header>
         <h1>Mock Interview Questions & Answers</h1>
     </header>
@@ -23,5 +26,6 @@
     <footer>
         <p>&copy; 2024 AI Resume Analyzer</p>
     </footer>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>
 </html>

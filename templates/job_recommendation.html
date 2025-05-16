@@ -6,16 +6,50 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
-
-<header>
-    <h1>Job Recommendation</h1>
-    <p>Upload your resume to get personalized job recommendations.</p>
+<div id="loader-wrapper">
+  <div id="loader"></div>
+</div>
+    <div class="slider">
+        <div class="slides">
+            <img src="{{ url_for('static', filename='images/1.png') }}" alt="Banner 1" class="slide" />
+            <img src="{{ url_for('static', filename='images/2.png') }}" alt="Banner 2" class="slide" />
+            <img src="{{ url_for('static', filename='images/3.png') }}" alt="Banner 3" class="slide" />
+        </div>
+    </div>
+<header class="job-reco"> 
+    <div> 
+        <div class="head1">
+            <h1>Job Recommendation</h1>
+        </div>
+        <div>
+             <p>Upload your resume to get personalized job recommendations.</p>
+        </div>
+    </div>
+    
 </header>
 
-<main class="container">
+<!-- <main class="container">
     <form action="/job_recommendation" method="post" enctype="multipart/form-data">
         <input type="file" name="resume" accept=".pdf" required>
         <button type="submit">Upload & Analyze</button>
+    </form>
+</main> -->
+<main class="resume-checker">
+    <form action="/job_recommendation" method="post" enctype="multipart/form-data">
+        <!-- Image acting as file input -->
+         <div class="label-input">
+            <label for="resume-upload">
+                <img src="{{ url_for('static', filename='images/upload.png') }}" alt="Upload Resume">
+            </label>
+        </div>
+        
+        <!-- Hidden file input -->
+        <div class="file-input"> 
+                <input type="file" id="resume-upload" name="resume" accept=".pdf" required style="display:none;" onchange="showFileName()">
+                <p id="file-name" style="margin-top: 10px; font-weight: bold;"></p>
+                
+                <button type="submit">Upload & Analyze</button>
+        </div>
     </form>
 </main>
 <section class="roadmap">
@@ -34,7 +68,19 @@
 <footer>
     <a href="/">Back to Home</a>
 </footer>
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+<script>
+    function showFileName() {
+        const input = document.getElementById('resume-upload');
+        const fileNameDisplay = document.getElementById('file-name');
 
+        if (input.files.length > 0) {
+            fileNameDisplay.textContent = `Selected: ${input.files[0].name}`;
+        } else {
+            fileNameDisplay.textContent = '';
+        }
+    }
+</script>
 </body>
 </html>
 <!-- Job Recommendation Page HTML -->
