@@ -6,11 +6,14 @@ from model_utils import recommend_jobs
 from model_utils import calculate_ats_score
 from docx import Document
 import google.generativeai as genai
-from config import gemini_api_key
+from markdown import markdown
+from config import openrouter_api_key
 import markdown
+from markdown import markdown
 from werkzeug.utils import secure_filename
 from docx import Document
 from docx.shared import Pt
+import requests
 
 
 app = Flask(__name__)
@@ -155,10 +158,6 @@ def generate_resume():
 
     return send_file(output_path, as_attachment=True)
 
-genai.configure(
-    api_key=gemini_api_key,
-    transport='rest',    # Force REST instead of default GRPC
-)
 @app.route('/mock_interview', methods=['GET', 'POST'])
 def mock_interview():
     if request.method == 'POST':
@@ -168,17 +167,30 @@ def mock_interview():
         prompt = f"Generate 5 interview questions along with brief answers for a {role} role focusing on {technologies}. Format the response cleanly in markdown."
 
         try:
-            model = genai.GenerativeModel('models/gemini-1.5-pro')
-            response = model.generate_content(prompt)
+            headers = {
+                "Authorization": f"Bearer {openrouter_api_key}",
+                "Content-Type": "application/json"
+            }
 
-            # ✅ Convert markdown response to HTML before rendering
-            generated_text = response.text
-            html_output = markdown.markdown(generated_text)
+            data = {
+                "model": "openai/gpt-3.5-turbo",
+                "messages": [
+                    {"role": "system", "content": "You are a helpful AI generating mock interview Q&A."},
+                    {"role": "user", "content": prompt}
+                ]
+            }
+
+            response = requests.post("https://openrouter.ai/api/v1/chat/completions", headers=headers, json=data)
+            response.raise_for_status()
+
+            result = response.json()
+            generated_text = result["choices"][0]["message"]["content"]
+            html_output = markdown(generated_text)
 
             return render_template('mock_interview_result.html', questions=html_output)
 
         except Exception as e:
-            return f"❌ Error generating interview using Gemini: {e}"
+            return f"❌ Error generating interview: {e}"
 
     return render_template('mock_interview.html')
 
